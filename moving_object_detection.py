@@ -1,37 +1,37 @@
-import cv2
-import imutils
+import cv2 #opencv
+import imutils #resize
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0) #cam id
 
 firstFrame = None
 area = 500
 
 while True:
-    _,img = cam.read()
+    _,img = cam.read() #read from the camera
     text = "Normal"
 
-    img = imutils.resize(img,width = 500)
+    img = imutils.resize(img, width = 500) #resize
 
-    grayImg = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    grayImg = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) #color to grayscale image
 
-    gaussianImg = cv2.GaussianBlur(grayImg, (21,21), 0)
+    gaussianImg = cv2.GaussianBlur(grayImg, (21,21), 0) #smoothend
 
     if firstFrame is None:
-        firstFrame = gaussianImg
+        firstFrame = gaussianImg #capturing the first frame
         continue
 
-    imgDiff = cv2.absdiff(firstFrame, gaussianImg)
+    imgDiff = cv2.absdiff(firstFrame, gaussianImg) #absolute diff
 
     _, threshImg = cv2.threshold(imgDiff, 25, 255, cv2.THRESH_BINARY)
 
-    threshImg = cv2.dilate(threshImg, None, iterations=2)
+    threshImg = cv2.dilate(threshImg, None, iterations=2) #left overs erotion
 
-    cnts = cv2.findContours(threshImg.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cv2.findContours(threshImg.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) #make complete contour
 
     cnts = imutils.grab_contours(cnts)
 
     for c in cnts:
-        if cv2.contourArea(c) < area:
+        if cv2.contourArea(c) < area: #make full area
             continue
         (x, y, w, h) = cv2.boundingRect(c)
         cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
