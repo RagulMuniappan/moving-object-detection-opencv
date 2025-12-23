@@ -34,7 +34,7 @@ while True:
         if cv2.contourArea(c) < area:
             continue
         (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)
+        cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
         text = "moving_object_detected"
     print(text)
 
