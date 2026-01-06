@@ -35,7 +35,22 @@ It captures live video from a webcam, compares each frame with a reference frame
 1. Run the moving object detection script:
    ```bash
    python main.py
-2. Press r to stop the camera feed and exit the program.
+2. Press 'r' to stop the camera feed and exit the program.
+
+---
+
+### Project Folder Structure
+
+moving-object-detection-opencv/
+│
+├── main.py                 # Main script for moving object detection
+├── README.md               # Project documentation
+├── requirements.txt        # Required Python libraries
+├── assets/                 # Sample outputs and images
+│   ├── output1.png
+│   └── output2.png
+│
+└── .gitignore              # Files and folders to ignore in Git
 
 ---
 
@@ -65,3 +80,7 @@ It captures live video from a webcam, compares each frame with a reference frame
 - Moving objects highlighted with bounding boxes  
 
 ---
+
+### License
+
+This project is intended for educational purposes.
